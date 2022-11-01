@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -16,7 +15,7 @@ export default class Form extends React.Component {
   };
 
   clearInputs = () => {
-    this.setState({ location: "", description: "", redirect: true });
+    this.setState({ location: "", description: ""});
   };
 
   handleSubmit = (event) => {
@@ -27,33 +26,26 @@ export default class Form extends React.Component {
     };
 
     this.props.addNewSighting(newSighting);
-    this.clearInputs();
   };
 
   render() {
-    if (this.state.redirect) {
-      return (
-        <Redirect to="/" />
-      )
-    } else {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="location"
-            placeholder="Location of sighting"
-            value={this.state.location}
-            onChange={this.handleChange}
-          />
-          <textarea
-            name="description"
-            placeholder="Description of sighting"
-            value={this.state.description}
-            onChange={this.handleChange}
-          />
-          <input type="submit" value="Report sighting" />
-        </form>
-      );
-    }
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          name="location"
+          placeholder="Location of sighting"
+          value={this.state.location}
+          onChange={this.handleChange}
+        />
+        <textarea
+          name="description"
+          placeholder="Description of sighting"
+          value={this.state.description}
+          onChange={this.handleChange}
+        />
+        <input type="submit" value="Report sighting" />
+      </form>
+    );
   }
 }
