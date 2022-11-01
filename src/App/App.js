@@ -29,7 +29,6 @@ export default class App extends React.Component {
   }
 
   addNewSighting = newSighting => {
-    console.log(newSighting)
     fetch('http://localhost:3001/sightings', {
       method: 'POST',
       body: JSON.stringify(newSighting),

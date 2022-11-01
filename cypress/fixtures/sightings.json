@@ -1,0 +1,7 @@
+{
+  "sightings": [
+      {"id": 1,"location": "Stevensville, MI", "description": "Giant flying pizza"},
+      {"id": 2, "location": "Gurnee, IL", "description": "Giant flying pie"},
+      {"id": 3, "location": "Cedar Rapids, IA", "description": "Giant flying pancake"}
+    ]
+}

@@ -80,7 +80,15 @@ input[type="submit"] {
   background: black;
   color: chartreuse;
   font-weight: bold;
+  cursor: pointer;
+  /* width: 60%;
+  margin: 10px auto; */
 }
+
+/* input[type="submit"]:hover {
+  background: chartreuse;
+  color: black;
+} */
 
 .error {
   color: red;
