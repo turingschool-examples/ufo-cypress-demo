@@ -1,6 +1,6 @@
 describe('Report form', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/report')
+    cy.visit('/report')
   })
 
   it('should render a text input, a textarea, and a submit input', () => {
@@ -18,7 +18,7 @@ describe('Report form', () => {
 
   it('should be able to display an error when the user does not fill out whole form', () => {
     cy.intercept('POST', 'http://localhost:3001/sightings', {message: 'Body is missing a required parameter of location'})
-    cy.visit('http://localhost:3000/report')
+    cy.visit('/report')
     cy.get('form').get('textarea').type('Saucer shape moving slowly over ground')
     cy.get('input[type="submit"]').click()
     cy.contains('Body is missing a required parameter of location')
