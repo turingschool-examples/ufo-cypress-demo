@@ -7,7 +7,7 @@ orbs:
 
 jobs:
   cypress/install:
-    build: "npm run build"
+    build: npm run build
       - cypress/run
   build_and_test:
     executor: node/default
