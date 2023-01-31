@@ -33,7 +33,12 @@ jobs:
 workflows: 
   test_my_app:
     jobs:
-      - cypress/run # "run" job comes from "cypress" orb
+      - cypress/install:
+          build: "npm run build"
+      - cypress/run:
+          record: true
+          parallel: true
+          parallelism: 10
       - build_and_test
       - deploy:
           requires:
@@ -41,3 +46,11 @@ workflows:
           filters:
             branches:
               only: ci # only deploy when on main
+  build:
+    jobs:
+      - cypress/install:
+          build: "npm run build"
+      - cypress/run:
+          record: true
+          parallel: true
+          parallelism: 10
