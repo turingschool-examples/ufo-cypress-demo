@@ -10,17 +10,14 @@ jobs:
     executor: node/default
     steps:
       - checkout
-      - cypress/install:
-          name: Install cypress
-          command: cypress/run
       - node/install-packages:
           pkg-manager: npm
-      - run:
-          name: Run tests
-          command: npm run cypress
       - run : 
           name : Run build
           command: npm run build
+      - run:
+          name: Run tests
+          command: npm run cypress
       - persist_to_workspace:
           root: ~/project
           paths:
