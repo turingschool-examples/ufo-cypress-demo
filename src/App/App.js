@@ -52,7 +52,7 @@ const App = () => {
     <>
       <h1>👁 SkyWatcher 👁</h1>
       <nav>
-        <NavLink exact to='/'>Sightings</NavLink>
+        <NavLink to='/'>Sightings</NavLink>
         <NavLink to='/report' onClick={() => updateRedirect(false)}>Report a new sighting</NavLink>
       </nav>
 
