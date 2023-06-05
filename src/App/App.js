@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Sightings from '../Sightings/Sightings';
 import Form from '../Form/Form';
-import { Route, NavLink, Redirect } from 'react-router-dom';
+import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import './App.css';
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
     fetch('http://localhost:3001/sightings', {
       method: 'POST',
       body: JSON.stringify(newSighting),
-      headers: {"Content-Type": "application/json"}
+      headers: {'Content-Type': 'application/json'}
     })
       .then(res => res.json())
       .then(response => {
@@ -53,17 +53,21 @@ const App = () => {
       <h1>👁 SkyWatcher 👁</h1>
       <nav>
         <NavLink exact to='/'>Sightings</NavLink>
-        <NavLink to='/report'>Report a new sighting</NavLink>
+        <NavLink to='/report' onClick={() => updateRedirect(false)}>Report a new sighting</NavLink>
       </nav>
 
-      {error && <p className="error">{error.message}</p>}
+      {error && <p className='error'>{error.message}</p>}
+
       {!sightings.length && <p>Loading ...</p>}
+
       {sightings.length && !error &&
-        <Route exact path="/"
-          render={() => <Sightings sightings={sightings} />} />
+        <Routes>
+          <Route exact path='/' element={<Sightings sightings={sightings} />} />
+          <Route exact path='/report' element={<Form addNewSighting={addNewSighting} />} />
+        </Routes>
       }
-      <Route exact path='/report' render={() => <Form addNewSighting={addNewSighting} />} />
-      {redirect && <Redirect exact to="/" />}
+
+      {redirect && <Navigate replace to='/' />}
     </>
   )
 }
