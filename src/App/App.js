@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import Sightings from '../Sightings/Sightings';
 import Form from '../Form/Form';
-import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import { Routes, Route, NavLink, useNavigate } from 'react-router-dom';
 import './App.css';
 
 const App = () => {
   const [sightings, updateSightings] = useState([]);
   const [error, updateError] = useState('');
-  const [redirect, updateRedirect] = useState(false);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetch('http://localhost:3001/sightings')
@@ -32,20 +33,20 @@ const App = () => {
       body: JSON.stringify(newSighting),
       headers: {'Content-Type': 'application/json'}
     })
-      .then(res => res.json())
-      .then(response => {
-        if (response.message) {
-          throw new Error(response.message);
-        } else {
-          return response;
-        }
-      })
-      .then(data => {
-        updateSightings([data, ...sightings]);
-        updateError('');
-        updateRedirect(true);
-      })
-      .catch(error => updateError(error))
+    .then(res => res.json())
+    .then(response => {
+      if (response.message) {
+        throw new Error(response.message);
+      } else {
+        return response;
+      }
+    })
+    .then(data => {
+      updateSightings([data, ...sightings]);
+      updateError('');
+      navigate('/');
+    })
+    .catch(error => updateError(error))
   }
 
   return (
@@ -53,7 +54,7 @@ const App = () => {
       <h1>👁 SkyWatcher 👁</h1>
       <nav>
         <NavLink to='/'>Sightings</NavLink>
-        <NavLink to='/report' onClick={() => updateRedirect(false)}>Report a new sighting</NavLink>
+        <NavLink to='/report'>Report a new sighting</NavLink>
       </nav>
 
       {error && <p className='error'>{error.message}</p>}
@@ -66,8 +67,6 @@ const App = () => {
           <Route exact path='/report' element={<Form addNewSighting={addNewSighting} />} />
         </Routes>
       }
-
-      {redirect && <Navigate replace to='/' />}
     </>
   )
 }
