@@ -18,7 +18,7 @@
 1. Determine how to organize the tests for these user flows in different spec files.
 1. Test all 5 (or more) user flows
 1. Intercept all network requests and stub mock responses that closely match what the real responses would be.
-  * For at least one intercept, you should (create an alias and use wait() to wait for that alias)[https://docs.cypress.io/guides/guides/network-requests#Waiting] before running your assertions
+  * For at least one intercept, you should [create an alias and use wait() to wait for that alias](https://docs.cypress.io/guides/guides/network-requests#Waiting) before running your assertions
   * How can you tell if they're being intercepted/stubbed successfully?
 
 Consider:  How would you approach writing tests to meet the following requirements?
